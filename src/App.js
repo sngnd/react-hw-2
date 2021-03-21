@@ -17,7 +17,7 @@ class App extends React.Component {
 
   handleOnChange = (event) => {
     const inputText = event.target.value;
-    let dateFormat = /\d{4}[/-](0[1-9]|1[012])[/-](0[1-9]|[1-2][0-9]|3[01])/; // YYYY-MM-DD
+    let dateFormat = /\d{4}[/-](0[1-9]|1[012])[/-]([0-2][0-9]|3[01])/; // YYYY-MM-DD
     inputText.search(dateFormat) !== -1
       ? this.isDateValid(inputText)
         ? this.setState({ errorText: "" })
@@ -29,11 +29,14 @@ class App extends React.Component {
   };
 
   isDateValid = (date) => {
-    return new Date(date) > new Date() || isNaN(new Date(date)) ? false : true;
+    const inputDate = new Date(date);
+    return inputDate > new Date() || isNaN(inputDate) ? false : true;
   };
 
   getData = () => {
-    return <img src={this.state.data.hdurl} width="30%" height="auto"></img>;
+    return (
+      <img src={this.state.data.hdurl} width="30%" height="auto" alt=""></img>
+    );
   };
 
   handleOnSubmit = (event) => {
