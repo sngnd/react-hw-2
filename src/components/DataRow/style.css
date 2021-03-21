@@ -1,0 +1,7 @@
+.image__td {
+  width: 30%;
+}
+
+td:last-child {
+  padding-left: 4rem;
+}

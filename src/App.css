@@ -48,8 +48,6 @@ form {
   flex-direction: column;
 }
 
-.image__wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+table {
+  margin: 2rem 19rem;
 }

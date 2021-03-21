@@ -1,8 +1,9 @@
 import "./App.css";
 import React from "react";
 import { Button } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
 import { Box } from "@material-ui/core";
+import DateInput from "./components/InputDate";
+import DataRow from "./components/DataRow";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,33 +12,8 @@ class App extends React.Component {
       data: {},
       inputValue: "",
       api_key: "Gm0QahiVXispLYIZYjcjymInLogOnttki8V5I31t",
-      errorText: "initial",
     };
   }
-
-  handleOnChange = (event) => {
-    const inputText = event.target.value;
-    let dateFormat = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[1-2][0-9]|3[01])$/; // YYYY-MM-DD
-    inputText.search(dateFormat) !== -1
-      ? this.isDateValid(inputText)
-        ? this.setState({ errorText: "" })
-        : this.setState({ errorText: "Date is invalid" })
-      : this.setState({ errorText: "Required format: YYYY-MM-DD" });
-    this.setState({
-      inputValue: event.target.value,
-    });
-  };
-
-  isDateValid = (date) => {
-    const inputDate = new Date(date);
-    return inputDate > new Date() || isNaN(inputDate) ? false : true;
-  };
-
-  getData = () => {
-    return (
-      <img src={this.state.data.hdurl} width="30%" height="auto" alt=""></img>
-    );
-  };
 
   handleOnSubmit = (event) => {
     event.preventDefault();
@@ -50,6 +26,7 @@ class App extends React.Component {
         },
       })
       .then((response) => {
+        console.log(response.data);
         this.setState({ data: response.data });
       })
       .catch((error) => {
@@ -57,41 +34,42 @@ class App extends React.Component {
       });
   };
 
+  handleOnChange = (event) => {
+    this.setState({
+      inputValue: event.target.value,
+    });
+  };
+
   render() {
     return (
       <div>
         <div className="form__wrapper">
           <form onSubmit={this.handleOnSubmit}>
-            <TextField
-              error={
-                this.state.errorText.length === 0 ||
-                this.state.errorText === "initial"
-                  ? false
-                  : true
-              }
-              helperText={
-                this.state.errorText === "initial" ? "" : this.state.errorText
-              }
+            <DateInput
+              handleOnChange={this.handleOnChange}
               value={this.state.inputValue}
-              label="Enter date"
-              required
-              onChange={this.handleOnChange}
-              size="medium"
-            ></TextField>
+            ></DateInput>
             <Box mt={1}>
               <Button
                 type="submit"
                 variant="contained"
                 color="primary"
                 fullWidth
-                disabled={this.state.errorText.length === 0 ? false : true}
               >
                 Ok
               </Button>
             </Box>
           </form>
         </div>
-        <div className="image__wrapper">{this.getData()}</div>
+        <table>
+          <tbody>
+            <DataRow
+              date={this.state.data.date}
+              explanation={this.state.data.explanation}
+              hdurl={this.state.data.hdurl}
+            ></DataRow>
+          </tbody>
+        </table>
       </div>
     );
   }
