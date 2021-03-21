@@ -9,15 +9,15 @@ class DataRow extends React.Component {
 
   render() {
     return (
-      <tr>
-        <td className="image__td">
+      <div className="row__wrapper">
+        <div className="row__image">
           <img src={this.props.hdurl} width="100%" alt=""></img>
-        </td>
-        <td>
+        </div>
+        <div className="row__info">
           <h3>{this.props.date}</h3>
           <p>{this.props.explanation}</p>
-        </td>
-      </tr>
+        </div>
+      </div>
     );
   }
 }

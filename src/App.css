@@ -48,6 +48,6 @@ form {
   flex-direction: column;
 }
 
-table {
+.data__wrapper {
   margin: 2rem 19rem;
 }

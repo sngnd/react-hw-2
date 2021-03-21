@@ -61,15 +61,13 @@ class App extends React.Component {
             </Box>
           </form>
         </div>
-        <table>
-          <tbody>
-            <DataRow
-              date={this.state.data.date}
-              explanation={this.state.data.explanation}
-              hdurl={this.state.data.hdurl}
-            ></DataRow>
-          </tbody>
-        </table>
+        <div className="data__wrapper">
+          <DataRow
+            date={this.state.data.date}
+            explanation={this.state.data.explanation}
+            hdurl={this.state.data.hdurl}
+          ></DataRow>
+        </div>
       </div>
     );
   }
