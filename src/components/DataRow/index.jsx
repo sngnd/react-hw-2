@@ -15,7 +15,7 @@ class DataRow extends React.Component {
         </div>
         <div className="row__info">
           <h3>{this.props.date}</h3>
-          <p>{this.props.explanation}</p>
+          <span>{this.props.explanation}</span>
         </div>
       </div>
     );
